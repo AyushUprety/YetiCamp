@@ -40,7 +40,10 @@ app.get('/campground',async (req,res) => {
 app.post('/campground', async(req,res) => {
     const campground = new Campground({
         title:req.body.title,
-        location:req.body.location
+        location:req.body.location,
+        image:req.body.image,
+        price:req.body.price,
+        description:req.body.description
     })
     await campground.save();
     res.render('campgrounds/show', {campground})

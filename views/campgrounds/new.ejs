@@ -1,13 +1,31 @@
 <% layout('./layouts/boilerplate') %>
 
-    <form action="/campground" method="POST">
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" >
-      
-        <label for="location">Location</label>
-        <input type="text" id="location" name="location" >
-        <button>Submit</button>
+<div class="row">
+    <form class = "col-md-6 offset-3" action="/campground" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="Title" name='title'aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" name='location' id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="Imageurl">imageurl</label>
+            <input type="text" class="form-control" name='image' id="imageurl">
+          </div>
+           <div class="mb-3">
+            <label class="form label" for="price">Price</label>
+            <div class="input-group">
+                <span class="input-group-text" id="price">@</span>
+                <input type="text" name='price' class="form-control" placeholder="0.00" aria-label="Price" aria-describedby="price">
+            </div>   
+            
+          </div>
+           <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name='description' id="description" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Add Campground</button>
     </form>
-    <footer>
-        <a href="/campground">View all Campground</a>
-    </footer>
+</div>    
