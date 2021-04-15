@@ -1,30 +1,60 @@
 <% layout('./layouts/boilerplate') %>
 
 <div class="row">
-    <form class = "col-md-6 offset-3" action="/campground" method="POST">
+    <form class = "col-md-6 offset-3 needs-validation" novalidate action="/campground" method="POST">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="Title" name='title'aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="Title" name='title'aria-describedby="emailHelp"required>
+            <div class="invalid-feedback">
+              Please enter the required title !
+            </div>
+            <div class="valid-feedback">
+              Looks Nice !
+            </div>
           </div>
           <div class="mb-3">
             <label for="location" class="form-label">Location</label>
-            <input type="text" class="form-control" name='location' id="exampleInputPassword1">
+            <input type="text" class="form-control" name='location' id="exampleInputPassword1"required>
+            <div class="invalid-feedback">
+              Please enter the required Location !
+            </div>
+            <div class="valid-feedback">
+              Looks Nice !
+            </div>
           </div>
           <div class="mb-3">
             <label class="form-label" for="Imageurl">imageurl</label>
-            <input type="text" class="form-control" name='image' id="imageurl">
+            <input type="text" class="form-control" name='image' id="imageurl"required>
+            <div class="invalid-feedback">
+              Please enter the  required imageurl !
+            </div>
+            <div class="valid-feedback">
+              Looks Nice !
+            </div>
           </div>
            <div class="mb-3">
             <label class="form label" for="price">Price</label>
             <div class="input-group">
                 <span class="input-group-text" id="price">@</span>
-                <input type="text" name='price' class="form-control" placeholder="0.00" aria-label="Price" aria-describedby="price">
+                <input type="text" name='price' class="form-control" placeholder="0.00" aria-label="Price" aria-describedby="price"required>
+                <div class="invalid-feedback">
+                  Please enter the required price !
+                </div>
+                <div class="valid-feedback">
+                  Looks Nice !
+                </div>
             </div>   
             
           </div>
            <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" name='description' id="description" rows="3"></textarea>
+            <textarea class="form-control" name='description' id="description" rows="3" required></textarea>
+            <div class="invalid-feedback">
+              Please enter the required description !
+            </div>
+            <div class="valid-feedback">
+              Looks Nice !
+            </div>
           </div>
           <button type="submit" class="btn btn-success">Add Campground</button>
     </form>
