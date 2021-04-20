@@ -12,8 +12,11 @@
                     <h5 class="card-title"><%= campground.title %></h5>
                     <p class="card-text"><%= campground.description %></p>
                     <p class="card-text text-muted"><%= campground.location %></p>
-                    <a href="/campground/<%= campground.id %>" class="btn btn-primary"><%= campground.title %></a>
-                  
+                    <a href="/campground/<%= campground.id %>" class="btn btn-primary d-inline"><%= campground.title %></a>
+                    <!-- <form action="/campground/<%= campground.id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger d-inline">Delete</button>
+                    </form>
+                   -->
                 </div>
                
         

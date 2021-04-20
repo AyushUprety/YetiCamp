@@ -1,7 +1,7 @@
 <% layout('./layouts/boilerplate') %>
     <h1 class="text-center">Edit Campground</h1>
     <div class="row">
-        <form class = "col-md-6 offset-3 needs-validation"  novalidate action="/campground" method="POST">
+        <form class = "col-md-6 offset-3 needs-validation"  novalidate action="/campground/<%= campground.id %>?_method=PUT" method="POST">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="Title" name='title'value="<%=campground.title %> aria-describedby="title" required >
