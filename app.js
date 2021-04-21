@@ -15,6 +15,11 @@ const ExpressError = require('./utils/ExpressError');
 const Joi = require('joi');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+const user = require('./models/user');
+const newuser = require('./routes/register');
 
 
 
@@ -40,6 +45,7 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 const sessionoptions = {
     secret: 'secretkey',
     resave: false,
@@ -52,21 +58,27 @@ const sessionoptions = {
 }
 app.use(session(sessionoptions));
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next) => {
     res.locals.success = req.flash('success');
+    res.locals.currentuser = req.user;
     next()
 })
 
+
+app.use('/',newuser);
 app.use('/campground', campgrounds);
 app.use('/campground/:id/reviews', reviews);
-
-
 
 app.get('/', (req,res)=>
 {
     res.render("home");
 })
-
 
 app.all('*',(req,res,next) =>
 {
