@@ -5,6 +5,7 @@ const authenticateuser = (req,res,next) => {
          next();
     }
     else{
+        req.session.backto = req.originalUrl;
         req.flash('success','Please login first to see the content !')
         res.redirect('/login')
     }
