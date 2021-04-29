@@ -25,6 +25,6 @@ module.exports.loginuser = function(req,res){
 }
 module.exports.logout = (req,res) => {
     req.logOut();
-    req.flash('success','Bye Bye see you soon!')
+    req.flash('success','Bye Bye see you soon!');
     res.redirect('/campground');
 }

@@ -6,8 +6,11 @@ module.exports.createReview = async(req,res) =>
     const {id} = req.params;
     const campground = await Campground.findById(id);
     const review = new Review(req.body);
+    console.log(review);
+    
     review.author = req.user.id;
     campground.reviews.push(review);
+    console.log(campground);
     await review.save();
     await campground.save();
     res.redirect(`/campground/${campground.id}`)

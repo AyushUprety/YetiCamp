@@ -1,7 +1,7 @@
 <% layout('./layouts/boilerplate') %>
 
 <div class="row">
-    <form class = "col-md-6 offset-3 needs-validation" novalidate action="/campground" method="POST">
+    <form class = "col-md-6 offset-3 needs-validation" novalidate action="/campground" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="Title" name='title'aria-describedby="emailHelp"required>
@@ -23,8 +23,10 @@
             </div>
           </div>
           <div class="mb-3">
-            <label class="form-label" for="Imageurl">imageurl</label>
-            <input type="text" class="form-control" name='image' id="imageurl"required>
+            <label class="form-label"for="image">images</label>
+            <input type="file" name="image" id="image" class="form-control" multiple>
+            <!-- <label class="form-label" for="Imageurl">imageurl</label>
+            <input type="text" class="form-control" name='image' id="imageurl"required> -->
             <div class="invalid-feedback">
               Please enter the  required imageurl !
             </div>

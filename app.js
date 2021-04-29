@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== "production"){
+    require('dotenv').config();
+}
+console.log(process.env.secret);
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -35,16 +39,12 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("we're connected!"); 
 });
-
-
 app.engine('ejs', ejsmate);
 app.set("view engine", "ejs");
 app.set("views",path.join(__dirname,'views'))
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 const sessionoptions = {
     secret: 'secretkey',
