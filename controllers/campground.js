@@ -1,4 +1,6 @@
 const Campground = require('../models/campground');
+const { cloudinary } = require('../cloudinary');
+
 
 module.exports.index = async (req,res) => {
     const campgrounds = await Campground.find({});
@@ -9,7 +11,6 @@ module.exports.addnewcamp = async(req,res,next) => {
     campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     campground.author = req.user.id;
     await campground.save();
-    console.log(campground);
     req.flash('success', 'Successfully made a new campground!');
     res.redirect(`/campground/${campground._id}`)
 }
@@ -23,7 +24,6 @@ module.exports.showpage = async (req, res,) => {
             path: 'author'
         }
     }).populate('author');
-    console.log(campground);
     if (!campground) {
         req.flash('error', 'Cannot find that campground!');
         return res.redirect('/campground');
@@ -40,6 +40,7 @@ module.exports.edit = async(req,res) => {
 }
 module.exports.updatecamp = async(req, res) => {
     const { id } = req.params;
+    console.log(req.body);
     const campgrounds = await Campground.findById(id);
     if(!campgrounds.author.equals(req.user.id)){
         req.flash('success','you donot have permission to do that!');
@@ -50,6 +51,12 @@ module.exports.updatecamp = async(req, res) => {
         const Image = req.files.map(f => ({ url: f.path, filename: f.filename }));
         campground.images.push(...Image);
         await campground.save();
+        if(req.body.deleteimages){
+            for(let filename of req.body.deleteimages){
+                await cloudinary.uploader.destroy(filename);
+            }
+            await campground.updateOne({$pull:{images:{filename:{$in:req.body.deleteimages}}}});
+        }
         req.flash('success','Campground is successfully updated')
         res.redirect(`/campground/${campground.id}`)
     }
