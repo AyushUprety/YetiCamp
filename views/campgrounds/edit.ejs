@@ -1,10 +1,10 @@
 <% layout('./layouts/boilerplate') %>
     <h1 class="text-center">Edit Campground</h1>
     <div class="row">
-        <form class = "col-md-6 offset-3 needs-validation"  novalidate action="/campground/<%= campground.id %>?_method=PUT" method="POST">
+        <form class = "col-md-6 offset-3 needs-validation"  novalidate action="/campground/<%= campground.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="Title" name='title'value="<%=campground.title %> aria-describedby="title" required >
+                <input type="text" class="form-control" id="Title" name='title'value="<%=campground.title %>" aria-describedby="title" required >
                 <div class="invalid-feedback">
                   Please enter the required title !
                 </div>
@@ -23,14 +23,9 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label class="form-label" for="Imageurl">imageurl</label>
-                <input type="text" class="form-control" name='image' id="imageurl"  value="<%= campground.image%>"required>
-                <div class="invalid-feedback">
-                  Please enter the  required imageurl !
-                </div>
-                <div class="valid-feedback">
-                  Looks Nice !
-                </div>
+                <label class="form-label" for="image">imageurl</label>
+                <input type="file" name='image' id="image" required multiple>
+                
               </div>
                <div class="mb-3">
                 <label class="form label" for="price">Price</label>

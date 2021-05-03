@@ -40,14 +40,20 @@ module.exports.edit = async(req,res) => {
 }
 module.exports.updatecamp = async(req, res) => {
     const { id } = req.params;
-    const Campground = await Campground.findById(id);
-    if(!campground.author.equals(req.user.id)){
+    const campgrounds = await Campground.findById(id);
+    if(!campgrounds.author.equals(req.user.id)){
         req.flash('success','you donot have permission to do that!');
         return res.redirect(`/campground/${id}`)
     }
-    const campground = await Campground.findByIdAndUpdate(id, { ...req.body });
-    req.flash('success','Campground is successfully updated')
-    res.redirect(`/campground/${campground._id}`)
+    else{
+        const campground = await Campground.findByIdAndUpdate(id, { ...req.body });
+        const Image = req.files.map(f => ({ url: f.path, filename: f.filename }));
+        campground.images.push(...Image);
+        await campground.save();
+        req.flash('success','Campground is successfully updated')
+        res.redirect(`/campground/${campground.id}`)
+    }
+  
 }
 module.exports.deletecamp = async (req,res) =>
 {

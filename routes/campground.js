@@ -7,6 +7,7 @@ const authenticateuser = require('../middleware');
 const camp = require('../controllers/campground');
 const multer = require('multer');
 const {storage} = require('../cloudinary/');
+const { array } = require('joi');
 var upload = multer({storage});
 
 // app.get('/makecampground',async (req,res) => {
@@ -29,7 +30,7 @@ router.get('/new',authenticateuser,camp.newcamppage);
 
 router.route('/:id')
     .get(authenticateuser, catchAsync(camp.showpage))
-    .put(authenticateuser, catchAsync(camp.updatecamp))
+    .put(authenticateuser,upload.array('image'), catchAsync(camp.updatecamp))
     .delete(authenticateuser, catchAsync(camp.deletecamp))
 router.get('/:id/edit',authenticateuser, catchAsync(camp.edit))
 
