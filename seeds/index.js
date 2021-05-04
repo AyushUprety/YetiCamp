@@ -31,6 +31,7 @@ const seeddb = async() =>
             author:'608953bad8936c3670f94b39',
             location: `${cities[randomPlace].city}, ${cities[randomPlace].state}` ,
             title:`${sample(descriptors)} ${sample(places)}`,
+            geometry: { type: 'Point', coordinates: [ 85.36667, 27.71667 ] },
             images:[
                 {
                   url: 'https://res.cloudinary.com/ayushuprety/image/upload/v1619677568/YETICAMP/qmeiok7mkewdvqbsxulw.jpg',
