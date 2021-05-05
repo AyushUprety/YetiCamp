@@ -94,8 +94,8 @@ app.all('*',(req,res,next) =>
 {
     next(new ExpressError('page not found',404));
 })
-
-app.listen(3000, ()=>
+const port = process.env.Port || 3000;
+app.listen(port, ()=>
 {
     console.log("serving on port 3000");
 })
