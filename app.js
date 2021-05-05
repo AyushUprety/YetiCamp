@@ -24,10 +24,12 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const user = require('./models/user');
 const newuser = require('./routes/register');
+const MongoStore = require('connect-mongo');
+
+const mongourl = process.env.mongodb_url || 'mongodb://localhost/yeti-Camp';
 
 
-
-mongoose.connect('mongodb://localhost/yeti-Camp', {
+mongoose.connect(mongourl, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useCreateIndex:true,
@@ -46,7 +48,12 @@ app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
 
+const mongostore = MongoStore.create({
+    mongoUrl:'mongourl',
+    touchAfter:24*3600
+})
 const sessionoptions = {
+    mongostore,
     secret: 'secretkey',
     resave: false,
     saveUninitialized:true,

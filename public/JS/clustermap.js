@@ -6,6 +6,8 @@ style: 'mapbox://styles/mapbox/dark-v10',
 center: [-103.59179687498357, 40.66995747013945],
 zoom: 3
 });
+map.addControl(new mapboxgl.NavigationControl());
+
 console.log(campgrounds)
 map.on('load', function () {
 // Add a new source from our GeoJSON data and
